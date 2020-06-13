@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package>
+  <name>greenhouse</name>
+  <version>0.0.0</version>
+  <description>WVU Robotics Greenhouse Model/World for Gazebo Simulation</description>
+
+  <license>BSD</license>
+
+  <maintainer email="gdb0004@mix.wvu.edu">Gabe Bobbitt</maintainer>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>gazebo_ros</build_depend>
+  <build_depend>roslaunch</build_depend>
+
+  <run_depend>gazebo_ros</run_depend>
+  <run_depend>urdf</run_depend>
+  <run_depend>xacro</run_depend>
+
+  <export>
+  </export>
+</package>

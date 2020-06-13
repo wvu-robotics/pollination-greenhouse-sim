@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<sdf version="1.5">
+    <model name="greenhouse">
+      <!-- <pose>0 0 0  0 0 0</pose> -->
+      <static>true</static>
+      <link name="body">
+        <visual name="visual">
+          <geometry>
+            <mesh><uri>model://greenhouse/meshes/greenhouse2020v2.dae</uri></mesh>
+          </geometry>
+        </visual>
+      </link>
+    </model>
+</sdf>
