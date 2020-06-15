@@ -9,6 +9,11 @@
             <mesh><uri>model://greenhouse/meshes/greenhouse2020v2.dae</uri></mesh>
           </geometry>
         </visual>
+        <collision name='collision'>
+          <geometry>
+            <mesh><uri>model://greenhouse/meshes/greenhouse2020v2.dae</uri></mesh>
+          </geometry>
+        </collision>
       </link>
     </model>
 </sdf>
