@@ -11,12 +11,12 @@
     <include>
       <uri>model://greenhouse</uri>
     </include>
+    <physics type='ode'>
+      <ode>
+        <solver>
+          <friction_model>cone_model</friction_model>
+        </solver>
+      </ode>
+    </physics>
   </world>
-  <physics type='ode'>
-    <ode>
-      <solver>
-        <friction_model>cone_model</friction_model>
-      </solver>
-    </ode>
-  </physics>
 </sdf>
