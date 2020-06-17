@@ -1,0 +1,70 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <model name="tree-mesh">
+    <static>true</static>
+    <link name="link">
+
+      <!--
+      <collision name="collision">
+        <geometry>
+          <mesh>
+            <uri>model://tree-mesh/meshes/new_tree.dae</uri>
+            <scale>0.0625 0.0625 0.0625</scale>
+          </mesh>
+        </geometry>
+      </collision>
+      -->
+
+      <!-- simplified collision for sake of speed since leaves shouldn't be blocking anyway -->
+      <collision name="collision_0">
+        <pose frame=''>0 0.02 0.12 -0.09 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.01</radius>
+            <length>0.25</length>
+          </cylinder>
+        </geometry>
+      </collision>
+      <collision name="collision_1">
+        <pose frame=''>0 0.01 0.36 0.18 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.01</radius>
+            <length>0.25</length>
+          </cylinder>
+        </geometry>
+      </collision>
+
+      <visual name="leaves">
+        <geometry>
+          <mesh>
+            <uri>model://tree-mesh/meshes/leaves.dae</uri>
+            <scale>0.0325 0.0325 0.0325</scale>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <uri>model://tree-mesh/materials/scripts/</uri>
+            <uri>model://tree-mesh/materials/textures/</uri>
+            <name>NewTree/Branch</name>
+          </script>
+        </material>
+      </visual>
+      <visual name="bark">
+        <geometry>
+          <mesh>
+            <uri>model://tree-mesh/meshes/bark.dae</uri>
+            <scale>0.0325 0.0325 0.0325</scale>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <uri>model://tree-mesh/materials/scripts/</uri>
+            <uri>model://tree-mesh/materials/textures/</uri>
+            <name>NewTree/Bark</name>
+          </script>
+        </material>
+      </visual>
+    </link>
+  </model>
+</sdf>

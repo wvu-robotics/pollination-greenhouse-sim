@@ -1,0 +1,18 @@
+material Flower/Flower
+{
+  //receive_shadows on
+
+  technique
+  {
+    pass
+    {
+      ambient 0.5 0.5 0.5
+      diffuse 1.0 1.0 1.0
+
+      texture_unit
+      {
+        texture flower.png
+      }
+    }
+  }
+}
