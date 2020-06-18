@@ -6,8 +6,10 @@ material Flower/Flower
   {
     pass
     {
-      ambient 0.5 0.5 0.5
-      diffuse 1.0 1.0 1.0
+      ambient 0.7 0.7 0.7 1
+      diffuse 1.0 1.0 1.0 1
+      emissive 0.3 0.3 0.3 1
+      
 
       texture_unit
       {
