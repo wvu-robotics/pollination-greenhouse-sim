@@ -14,6 +14,7 @@
         <geometry>
           <mesh>
             <uri>model://bramble/meshes/bramble.dae</uri>
+            <scale>0.4 0.4 0.4</scale>
             <submesh>
               <name>petal</name>
             </submesh>
@@ -31,6 +32,7 @@
         <geometry>
           <mesh>
             <uri>model://bramble/meshes/bramble.dae</uri>
+            <scale>0.4 0.4 0.4</scale>
             <submesh>
               <name>carpel</name>
             </submesh>
@@ -48,6 +50,7 @@
         <geometry>
           <mesh>
             <uri>model://bramble/meshes/bramble.dae</uri>
+            <scale>0.4 0.4 0.4</scale>
             <submesh>
               <name>stamen</name>
             </submesh>

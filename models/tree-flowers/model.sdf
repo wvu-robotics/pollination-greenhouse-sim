@@ -14,32 +14,32 @@
     </joint>
 
     <include>
-      <uri>model://simple-flower</uri>
+      <uri>model://bramble</uri>
       <pose>-0.058506 -0.057965 0.348676 1.46057 -0.026669 -0.236442</pose>
     </include>
     <include>
-      <uri>model://simple-flower</uri>
+      <uri>model://bramble</uri>
       <pose>0.015803 0.202531 0.358288 -1.42731 0 0</pose>
     </include>
     <include>
-      <uri>model://simple-flower</uri>
+      <uri>model://bramble</uri>
       <pose>0.067876 -0.089279 0.474349 1.08554 0.353465 0.580889</pose>
     </include>
     <include>
-      <uri>model://simple-flower</uri>
+      <uri>model://bramble</uri>
       <pose>-0.198057 -0.016410 0.499770 0 -1.49206 0</pose>
     </include>
     <include>
-      <uri>model://simple-flower</uri>
+      <uri>model://bramble</uri>
       <pose>0.087757 0.104908 0.596102 0 1.49055 0</pose>
     </include>
     <include>
-      <uri>model://simple-flower</uri>
+      <uri>model://bramble</uri>
       <pose>0.107537 -0.046881 0.402327 -1.00423 1.504 -1.45072</pose>
     </include>
 
     <joint name="flower_joint" type="fixed">
-      <child>simple-flower::flower_link</child>
+      <child>bramble::flower_link</child>
       <parent>link</parent>
     </joint>
   </model>
