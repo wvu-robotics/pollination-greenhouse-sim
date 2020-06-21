@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<sdf version="1.6">
+  <model name="bramble-flower">
+    <static>true</static>
+    <link name="flower_link">
+      <!--<collision name="body_collision">
+        <geometry>
+          <box>
+            <size>1 1 1</size>
+          </box>
+        </geometry>
+      </collision>-->
+      <visual name="petals">
+        <geometry>
+          <mesh>
+            <uri>model://bramble/meshes/bramble.dae</uri>
+            <submesh>
+              <name>petal</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <uri>model://bramble/materials/scripts/</uri>
+            <uri>model://bramble/materials/textures/</uri>
+            <name>Bramble/Petal</name>
+          </script>
+        </material>
+      </visual>
+      <visual name="carpel">
+        <geometry>
+          <mesh>
+            <uri>model://bramble/meshes/bramble.dae</uri>
+            <submesh>
+              <name>carpel</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <uri>model://bramble/materials/scripts/</uri>
+            <uri>model://bramble/materials/textures/</uri>
+            <name>Bramble/Carpel</name>
+          </script>
+        </material>
+      </visual>
+      <visual name="stamen">
+        <geometry>
+          <mesh>
+            <uri>model://bramble/meshes/bramble.dae</uri>
+            <submesh>
+              <name>stamen</name>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <uri>model://bramble/materials/scripts/</uri>
+            <uri>model://bramble/materials/textures/</uri>
+            <name>Bramble/Stamen</name>
+          </script>
+        </material>
+      </visual>
+    </link>
+  </model>
+</sdf>
