@@ -2,6 +2,12 @@
 
 <sdf version="1.4">
   <world name="default">
+    <scene>
+      <ambient>0.4 0.4 0.4 1</ambient>
+      <background>0.7 0.7 0.7 1</background>
+      <shadows>false</shadows>
+    </scene>
+
     <include>
       <uri>model://ground_plane</uri>
     </include>
@@ -9,8 +15,35 @@
       <uri>model://sun</uri>
     </include>
     <include>
-      <uri>model://greenhouse</uri>
+      <uri>model://greenhouse-treeless</uri>
     </include>
+
+    <!-- trees -->
+    <include>
+      <uri>model://tree-flowers</uri>
+      <pose>2.21 3.39 0.35 0 0 0.276</pose>
+    </include>
+    <include>
+      <uri>model://tree-flowers</uri>
+      <pose>2.72 3.39 0.35 0 0 2.132</pose>
+    </include>
+    <include>
+      <uri>model://tree-flowers</uri>
+      <pose>3.24 3.39 0.35 0 0 6.25</pose>
+    </include>
+    <include>
+      <uri>model://tree-flowers</uri>
+      <pose>4.10 3.41 0.35 0 0 1.259</pose>
+    </include>
+    <include>
+      <uri>model://tree-flowers</uri>
+      <pose>4.62 3.41 0.35 0 0 5.014</pose>
+    </include>
+    <include>
+      <uri>model://tree-flowers</uri>
+      <pose>5.12 3.41 0.35 0 0 5.981</pose>
+    </include>
+
     <physics type='ode'>
       <ode>
         <solver>
