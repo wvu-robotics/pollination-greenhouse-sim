@@ -1,0 +1,60 @@
+material Greenhouse/Wall
+{
+  technique
+  {
+    pass
+    {
+      texture_unit
+      {
+        texture wall.png
+        scale 0.25 0.25
+      }
+    }
+  }
+}
+
+material Greenhouse/Table
+{
+  technique
+  {
+    pass
+    {
+      texture_unit
+      {
+        texture table.png
+        scale 0.5 0.5
+      }
+    }
+  }
+}
+
+material Greenhouse/Pot
+{
+  technique
+  {
+    pass
+    {
+      texture_unit
+      {
+        texture pot.png
+        scale 0.25 0.25
+      }
+    }
+  }
+}
+
+material Greenhouse/Scaffold
+{
+  technique
+  {
+    pass
+    {
+      texture_unit
+      {
+        texture scaffold.png
+        scale 0.5 0.5
+      }
+    }
+  }
+}
+

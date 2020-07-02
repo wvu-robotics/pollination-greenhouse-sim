@@ -3,13 +3,14 @@
   <model name="bramble-flower">
     <static>true</static>
     <link name="flower_link">
-      <!--<collision name="body_collision">
+      <collision name="body_collision">
         <geometry>
-          <box>
-            <size>1 1 1</size>
-          </box>
+          <mesh>
+            <uri>model://bramble/meshes/bramble.dae</uri>
+            <scale>0.4 0.4 0.4</scale>
+          </mesh>
         </geometry>
-      </collision>-->
+      </collision>
       <visual name="petals">
         <geometry>
           <mesh>

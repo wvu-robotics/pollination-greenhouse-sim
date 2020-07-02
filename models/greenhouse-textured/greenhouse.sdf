@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<sdf version="1.5">
+    <model name="greenhouse-textured">
+      <!-- <pose>0 0 0  0 0 0</pose> -->
+      <static>true</static>
+      <link name="body">
+        <visual name="visual_walls">
+          <geometry>
+            <mesh><uri>model://greenhouse-textured/meshes/greenhouse-walls.dae</uri></mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://greenhouse-textured/materials/scripts/</uri>
+              <uri>model://greenhouse-textured/materials/textures/</uri>
+              <name>Greenhouse/Wall</name>
+            </script>
+          </material>
+        </visual>
+        <visual name="visual_pots">
+          <geometry>
+            <mesh><uri>model://greenhouse-textured/meshes/greenhouse-pots.dae</uri></mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://greenhouse-textured/materials/scripts/</uri>
+              <uri>model://greenhouse-textured/materials/textures/</uri>
+              <name>Greenhouse/Pot</name>
+            </script>
+          </material>
+        </visual>
+        <visual name="visual_scaffold">
+          <geometry>
+            <mesh><uri>model://greenhouse-textured/meshes/greenhouse-scaffold.dae</uri></mesh>
+          </geometry>
+          <material>
+            <script>
+              <name>Gazebo/DarkGrey</name>
+            </script>
+          </material>
+        </visual>
+        <visual name="visual_table">
+          <geometry>
+            <mesh><uri>model://greenhouse-textured/meshes/greenhouse-table.dae</uri></mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://greenhouse-textured/materials/scripts/</uri>
+              <uri>model://greenhouse-textured/materials/textures/</uri>
+              <name>Greenhouse/Table</name>
+            </script>
+          </material>
+        </visual>
+        <collision name='collision_walls'>
+          <geometry>
+            <mesh><uri>model://greenhouse-textured/meshes/greenhouse-walls.dae</uri></mesh>
+          </geometry>
+        </collision>
+        <collision name='collision_pots'>
+          <geometry>
+            <mesh><uri>model://greenhouse-textured/meshes/greenhouse-pots.dae</uri></mesh>
+          </geometry>
+        </collision>
+        <collision name='collision_table'>
+          <geometry>
+            <mesh><uri>model://greenhouse-textured/meshes/greenhouse-table.dae</uri></mesh>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+</sdf>
