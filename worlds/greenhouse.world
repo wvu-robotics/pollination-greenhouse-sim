@@ -15,7 +15,8 @@
       <uri>model://sun</uri>
     </include>
     <include>
-      <uri>model://greenhouse-treeless</uri>
+      <uri>model://greenhouse-textured</uri>
+      <pose>7.33 0 0 0 0 -3.14159</pose>
     </include>
 
     <!-- trees -->

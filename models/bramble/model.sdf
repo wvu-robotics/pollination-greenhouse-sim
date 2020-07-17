@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <sdf version="1.6">
-  <model name="bramble-flower">
+  <model name="bramble">
     <static>true</static>
     <link name="flower_link">
       <collision name="body_collision">
         <geometry>
           <mesh>
             <uri>model://bramble/meshes/bramble.dae</uri>
-            <scale>0.4 0.4 0.4</scale>
+            <scale>0.2 0.2 0.2</scale>
           </mesh>
         </geometry>
       </collision>
@@ -15,7 +15,7 @@
         <geometry>
           <mesh>
             <uri>model://bramble/meshes/bramble.dae</uri>
-            <scale>0.4 0.4 0.4</scale>
+            <scale>0.2 0.2 0.2</scale>
             <submesh>
               <name>petal</name>
             </submesh>
@@ -33,7 +33,7 @@
         <geometry>
           <mesh>
             <uri>model://bramble/meshes/bramble.dae</uri>
-            <scale>0.4 0.4 0.4</scale>
+            <scale>0.2 0.2 0.2</scale>
             <submesh>
               <name>carpel</name>
             </submesh>
@@ -51,7 +51,7 @@
         <geometry>
           <mesh>
             <uri>model://bramble/meshes/bramble.dae</uri>
-            <scale>0.4 0.4 0.4</scale>
+            <scale>0.2 0.2 0.2</scale>
             <submesh>
               <name>stamen</name>
             </submesh>
