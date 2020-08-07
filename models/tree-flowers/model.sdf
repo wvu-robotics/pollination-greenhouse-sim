@@ -14,33 +14,60 @@
     </joint>
 
     <include>
+      <name>bramble_0</name>
+      <uri>model://bramble</uri>
+      <pose>0.107537 -0.046881 0.402327 -1.00423 1.504 -1.45072</pose>
+    </include>
+    <include>
+      <name>bramble_1</name>
       <uri>model://bramble</uri>
       <pose>-0.058506 -0.057965 0.348676 1.46057 -0.026669 -0.236442</pose>
     </include>
     <include>
+      <name>bramble_2</name>
       <uri>model://bramble</uri>
       <pose>0.015803 0.202531 0.358288 -1.42731 0 0</pose>
     </include>
     <include>
+      <name>bramble_3</name>
       <uri>model://bramble</uri>
       <pose>0.067876 -0.089279 0.474349 1.08554 0.353465 0.580889</pose>
     </include>
     <include>
+      <name>bramble_4</name>
       <uri>model://bramble</uri>
       <pose>-0.198057 -0.016410 0.499770 0 -1.49206 0</pose>
     </include>
     <include>
+      <name>bramble_5</name>
       <uri>model://bramble</uri>
       <pose>0.087757 0.104908 0.596102 0 1.49055 0</pose>
     </include>
-    <include>
-      <uri>model://bramble</uri>
-      <pose>0.107537 -0.046881 0.402327 -1.00423 1.504 -1.45072</pose>
-    </include>
 
-    <joint name="flower_joint" type="fixed">
-      <child>bramble::flower_link</child>
+    <joint name="flower_joint_0" type="fixed">
+      <child>bramble_0::flower_link</child>
       <parent>link</parent>
     </joint>
+    <joint name="flower_joint_1" type="fixed">
+      <child>bramble_1::flower_link</child>
+      <parent>link</parent>
+    </joint>
+    <joint name="flower_joint_2" type="fixed">
+      <child>bramble_2::flower_link</child>
+      <parent>link</parent>
+    </joint>
+    <joint name="flower_joint_3" type="fixed">
+      <child>bramble_3::flower_link</child>
+      <parent>link</parent>
+    </joint>
+    <joint name="flower_joint_4" type="fixed">
+      <child>bramble_4::flower_link</child>
+      <parent>link</parent>
+    </joint>
+    <joint name="flower_joint_5" type="fixed">
+      <child>bramble_5::flower_link</child>
+      <parent>link</parent>
+    </joint>
+
   </model>
 </sdf>
