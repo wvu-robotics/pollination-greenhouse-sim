@@ -21,26 +21,32 @@
 
     <!-- trees -->
     <include>
+      <name>tree_0</name>
       <uri>model://tree-flowers</uri>
       <pose>2.21 3.39 0.35 0 0 0.276</pose>
     </include>
     <include>
+      <name>tree_1</name>
       <uri>model://tree-flowers</uri>
       <pose>2.72 3.39 0.35 0 0 2.132</pose>
     </include>
     <include>
+      <name>tree_2</name>
       <uri>model://tree-flowers</uri>
       <pose>3.24 3.39 0.35 0 0 6.25</pose>
     </include>
     <include>
+      <name>tree_3</name>
       <uri>model://tree-flowers</uri>
       <pose>4.10 3.41 0.35 0 0 1.259</pose>
     </include>
     <include>
+      <name>tree_4</name>
       <uri>model://tree-flowers</uri>
       <pose>4.62 3.41 0.35 0 0 5.014</pose>
     </include>
     <include>
+      <name>tree_5</name>
       <uri>model://tree-flowers</uri>
       <pose>5.12 3.41 0.35 0 0 5.981</pose>
     </include>
