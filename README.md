@@ -9,6 +9,3 @@ Gazebo model.
 
 roslaunch simulator-greenhouse greenhouse.launch
 
-### TODO
-- Add color.
-- Add detailed tree meshes.
