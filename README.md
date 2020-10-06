@@ -5,6 +5,10 @@ a workspace including the package will add the `models` directory to
 `GAZEBO_MODEL_PATH`, allowing the greenhouse model to be included like any other
 Gazebo model.
 
+# view world
+
+roslaunch simulator-greenhouse greenhouse.launch
+
 ### TODO
 - Add color.
 - Add detailed tree meshes.
