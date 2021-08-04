@@ -1,4 +1,4 @@
-<!--  skew 1-->
+<!-- skew 2 -->
 <?xml version="1.0"?>
 <sdf version="1.6">
   <model name="tree-flowers">
@@ -17,22 +17,22 @@
     <include>
       <name>bramble_0</name>
       <uri>model://bramble</uri>
-      <pose>0.107537 -0.046881 0.402327 -1.00423 1.504 -1.45072</pose>
+      <pose>0.036045 -0.066132 -0.15162 0.477087 0.09982 0.051467</pose>
     </include>
     <include>
       <name>bramble_1</name>
       <uri>model://bramble</uri>
-      <pose>-0.058506 -0.057965 0.348676 1.46057 -0.026669 -0.236442</pose>
+      <pose>-0.118935 -0.013842 -0.081691 0.992055 -0.236186 -0.143781</pose>
     </include>
     <include>
       <name>bramble_2</name>
       <uri>model://bramble</uri>
-      <pose>0.015803 0.202531 0.358288 -1.42731 0 0</pose>
+      <pose>0.084429 -0.05383 0.475019 1.26092 0.010547 -0.303346</pose>
     </include>
     <include>
       <name>bramble_3</name>
       <uri>model://bramble</uri>
-      <pose>0.067876 -0.089279 0.474349 1.08554 0.353465 0.580889</pose>
+      <pose>-0.100754 -0.011684 0.50616 0.92295 -0.152842 -0.152657</pose>
     </include>
     <include>
       <name>bramble_4</name>
@@ -42,7 +42,27 @@
     <include>
       <name>bramble_5</name>
       <uri>model://bramble</uri>
-      <pose>0.087757 0.104908 0.596102 0 1.49055 0</pose>
+      <pose>0.074226 0.121901 0.51745 -0.369146 0 0</pose>
+    </include>
+    <include>
+      <name>bramble_6</name>
+      <uri>model://bramble</uri>
+      <pose>-0.079732 -0.069156 0.314542 0.92295 -0.152842 -0.152657</pose>
+    </include>
+    <include>
+      <name>bramble_7</name>
+      <uri>model://bramble</uri>
+      <pose>0.054226 0.071901 0.31745 -0.369146 0 0</pose>
+    </include>
+    <include>
+      <name>bramble_8</name>
+      <uri>model://bramble</uri>
+      <pose>0.052801 0.276553 -0.036333 -1.67778 -0.004909 -0.311632</pose>
+    </include>
+    <include>
+      <name>bramble_9</name>
+      <uri>model://bramble</uri>
+      <pose>-0.015011 0.003586 0.565314 0 -0 0</pose>
     </include>
 
     <joint name="flower_joint_0" type="fixed">
@@ -67,6 +87,22 @@
     </joint>
     <joint name="flower_joint_5" type="fixed">
       <child>bramble_5::flower_link</child>
+      <parent>link</parent>
+    </joint>
+    <joint name="flower_joint_6" type="fixed">
+      <child>bramble_6::flower_link</child>
+      <parent>link</parent>
+    </joint>
+    <joint name="flower_joint_7" type="fixed">
+      <child>bramble_7::flower_link</child>
+      <parent>link</parent>
+    </joint>
+      <joint name="flower_joint_8" type="fixed">
+      <child>bramble_8::flower_link</child>
+      <parent>link</parent>
+    </joint>
+    <joint name="flower_joint_9" type="fixed">
+      <child>bramble_9::flower_link</child>
       <parent>link</parent>
     </joint>
 

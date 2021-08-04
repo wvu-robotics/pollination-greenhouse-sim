@@ -1,0 +1,867 @@
+<?xml version='1.0'?>
+<sdf version='1.7'>
+  <model name='tree-flowers-skew-4'>
+    <model name='bramble'>
+      <static>1</static>
+      <link name='flower_link'>
+        <collision name='body_collision'>
+          <geometry>
+            <mesh>
+              <uri>model://bramble/meshes/bramble.dae</uri>
+              <scale>0.2 0.2 0.2</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name='petals'>
+          <geometry>
+            <mesh>
+              <uri>model://bramble/meshes/bramble.dae</uri>
+              <scale>0.2 0.2 0.2</scale>
+              <submesh>
+                <name>petal</name>
+              </submesh>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://bramble/materials/scripts/</uri>
+              <uri>model://bramble/materials/textures/</uri>
+              <name>Bramble/Petal</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='carpel'>
+          <geometry>
+            <mesh>
+              <uri>model://bramble/meshes/bramble.dae</uri>
+              <scale>0.2 0.2 0.2</scale>
+              <submesh>
+                <name>carpel</name>
+              </submesh>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://bramble/materials/scripts/</uri>
+              <uri>model://bramble/materials/textures/</uri>
+              <name>Bramble/Carpel</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='stamen'>
+          <geometry>
+            <mesh>
+              <uri>model://bramble/meshes/bramble.dae</uri>
+              <scale>0.2 0.2 0.2</scale>
+              <submesh>
+                <name>stamen</name>
+              </submesh>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://bramble/materials/scripts/</uri>
+              <uri>model://bramble/materials/textures/</uri>
+              <name>Bramble/Stamen</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+      <pose>0.121003 -0.000205 -0.233437 -0.164251 1.01942 0</pose>
+    </model>
+    <model name='bramble_0'>
+      <static>1</static>
+      <link name='flower_link'>
+        <collision name='body_collision'>
+          <geometry>
+            <mesh>
+              <uri>model://bramble/meshes/bramble.dae</uri>
+              <scale>0.2 0.2 0.2</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name='petals'>
+          <geometry>
+            <mesh>
+              <uri>model://bramble/meshes/bramble.dae</uri>
+              <scale>0.2 0.2 0.2</scale>
+              <submesh>
+                <name>petal</name>
+              </submesh>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://bramble/materials/scripts/</uri>
+              <uri>model://bramble/materials/textures/</uri>
+              <name>Bramble/Petal</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='carpel'>
+          <geometry>
+            <mesh>
+              <uri>model://bramble/meshes/bramble.dae</uri>
+              <scale>0.2 0.2 0.2</scale>
+              <submesh>
+                <name>carpel</name>
+              </submesh>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://bramble/materials/scripts/</uri>
+              <uri>model://bramble/materials/textures/</uri>
+              <name>Bramble/Carpel</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='stamen'>
+          <geometry>
+            <mesh>
+              <uri>model://bramble/meshes/bramble.dae</uri>
+              <scale>0.2 0.2 0.2</scale>
+              <submesh>
+                <name>stamen</name>
+              </submesh>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://bramble/materials/scripts/</uri>
+              <uri>model://bramble/materials/textures/</uri>
+              <name>Bramble/Stamen</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+      <pose>0.018173 0.099254 0.430189 0 0.734017 0.536943</pose>
+    </model>
+    <model name='bramble_1'>
+      <static>1</static>
+      <link name='flower_link'>
+        <collision name='body_collision'>
+          <geometry>
+            <mesh>
+              <uri>model://bramble/meshes/bramble.dae</uri>
+              <scale>0.2 0.2 0.2</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name='petals'>
+          <geometry>
+            <mesh>
+              <uri>model://bramble/meshes/bramble.dae</uri>
+              <scale>0.2 0.2 0.2</scale>
+              <submesh>
+                <name>petal</name>
+              </submesh>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://bramble/materials/scripts/</uri>
+              <uri>model://bramble/materials/textures/</uri>
+              <name>Bramble/Petal</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='carpel'>
+          <geometry>
+            <mesh>
+              <uri>model://bramble/meshes/bramble.dae</uri>
+              <scale>0.2 0.2 0.2</scale>
+              <submesh>
+                <name>carpel</name>
+              </submesh>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://bramble/materials/scripts/</uri>
+              <uri>model://bramble/materials/textures/</uri>
+              <name>Bramble/Carpel</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='stamen'>
+          <geometry>
+            <mesh>
+              <uri>model://bramble/meshes/bramble.dae</uri>
+              <scale>0.2 0.2 0.2</scale>
+              <submesh>
+                <name>stamen</name>
+              </submesh>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://bramble/materials/scripts/</uri>
+              <uri>model://bramble/materials/textures/</uri>
+              <name>Bramble/Stamen</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+      <pose>-0.17867 -0.198845 0.026816 1.47097 -0.164983 -1.02315</pose>
+    </model>
+    <model name='bramble_10'>
+      <static>1</static>
+      <link name='flower_link'>
+        <collision name='body_collision'>
+          <geometry>
+            <mesh>
+              <uri>model://bramble/meshes/bramble.dae</uri>
+              <scale>0.2 0.2 0.2</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name='petals'>
+          <geometry>
+            <mesh>
+              <uri>model://bramble/meshes/bramble.dae</uri>
+              <scale>0.2 0.2 0.2</scale>
+              <submesh>
+                <name>petal</name>
+              </submesh>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://bramble/materials/scripts/</uri>
+              <uri>model://bramble/materials/textures/</uri>
+              <name>Bramble/Petal</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='carpel'>
+          <geometry>
+            <mesh>
+              <uri>model://bramble/meshes/bramble.dae</uri>
+              <scale>0.2 0.2 0.2</scale>
+              <submesh>
+                <name>carpel</name>
+              </submesh>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://bramble/materials/scripts/</uri>
+              <uri>model://bramble/materials/textures/</uri>
+              <name>Bramble/Carpel</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='stamen'>
+          <geometry>
+            <mesh>
+              <uri>model://bramble/meshes/bramble.dae</uri>
+              <scale>0.2 0.2 0.2</scale>
+              <submesh>
+                <name>stamen</name>
+              </submesh>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://bramble/materials/scripts/</uri>
+              <uri>model://bramble/materials/textures/</uri>
+              <name>Bramble/Stamen</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+      <pose>-0.17264 -0.145998 0.252135 1.50595 -1.1916 -0.697784</pose>
+    </model>
+    <model name='bramble_2'>
+      <static>1</static>
+      <link name='flower_link'>
+        <collision name='body_collision'>
+          <geometry>
+            <mesh>
+              <uri>model://bramble/meshes/bramble.dae</uri>
+              <scale>0.2 0.2 0.2</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name='petals'>
+          <geometry>
+            <mesh>
+              <uri>model://bramble/meshes/bramble.dae</uri>
+              <scale>0.2 0.2 0.2</scale>
+              <submesh>
+                <name>petal</name>
+              </submesh>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://bramble/materials/scripts/</uri>
+              <uri>model://bramble/materials/textures/</uri>
+              <name>Bramble/Petal</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='carpel'>
+          <geometry>
+            <mesh>
+              <uri>model://bramble/meshes/bramble.dae</uri>
+              <scale>0.2 0.2 0.2</scale>
+              <submesh>
+                <name>carpel</name>
+              </submesh>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://bramble/materials/scripts/</uri>
+              <uri>model://bramble/materials/textures/</uri>
+              <name>Bramble/Carpel</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='stamen'>
+          <geometry>
+            <mesh>
+              <uri>model://bramble/meshes/bramble.dae</uri>
+              <scale>0.2 0.2 0.2</scale>
+              <submesh>
+                <name>stamen</name>
+              </submesh>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://bramble/materials/scripts/</uri>
+              <uri>model://bramble/materials/textures/</uri>
+              <name>Bramble/Stamen</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+      <pose>0.058658 -0.172472 0.053653 1.2027 0.263493 0.593977</pose>
+    </model>
+    <model name='bramble_3'>
+      <static>1</static>
+      <link name='flower_link'>
+        <collision name='body_collision'>
+          <geometry>
+            <mesh>
+              <uri>model://bramble/meshes/bramble.dae</uri>
+              <scale>0.2 0.2 0.2</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name='petals'>
+          <geometry>
+            <mesh>
+              <uri>model://bramble/meshes/bramble.dae</uri>
+              <scale>0.2 0.2 0.2</scale>
+              <submesh>
+                <name>petal</name>
+              </submesh>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://bramble/materials/scripts/</uri>
+              <uri>model://bramble/materials/textures/</uri>
+              <name>Bramble/Petal</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='carpel'>
+          <geometry>
+            <mesh>
+              <uri>model://bramble/meshes/bramble.dae</uri>
+              <scale>0.2 0.2 0.2</scale>
+              <submesh>
+                <name>carpel</name>
+              </submesh>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://bramble/materials/scripts/</uri>
+              <uri>model://bramble/materials/textures/</uri>
+              <name>Bramble/Carpel</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='stamen'>
+          <geometry>
+            <mesh>
+              <uri>model://bramble/meshes/bramble.dae</uri>
+              <scale>0.2 0.2 0.2</scale>
+              <submesh>
+                <name>stamen</name>
+              </submesh>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://bramble/materials/scripts/</uri>
+              <uri>model://bramble/materials/textures/</uri>
+              <name>Bramble/Stamen</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+      <pose>0.184221 -0.006364 -0.050201 -0.564276 0.547567 -0.967201</pose>
+    </model>
+    <model name='bramble_4'>
+      <static>1</static>
+      <link name='flower_link'>
+        <collision name='body_collision'>
+          <geometry>
+            <mesh>
+              <uri>model://bramble/meshes/bramble.dae</uri>
+              <scale>0.2 0.2 0.2</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name='petals'>
+          <geometry>
+            <mesh>
+              <uri>model://bramble/meshes/bramble.dae</uri>
+              <scale>0.2 0.2 0.2</scale>
+              <submesh>
+                <name>petal</name>
+              </submesh>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://bramble/materials/scripts/</uri>
+              <uri>model://bramble/materials/textures/</uri>
+              <name>Bramble/Petal</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='carpel'>
+          <geometry>
+            <mesh>
+              <uri>model://bramble/meshes/bramble.dae</uri>
+              <scale>0.2 0.2 0.2</scale>
+              <submesh>
+                <name>carpel</name>
+              </submesh>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://bramble/materials/scripts/</uri>
+              <uri>model://bramble/materials/textures/</uri>
+              <name>Bramble/Carpel</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='stamen'>
+          <geometry>
+            <mesh>
+              <uri>model://bramble/meshes/bramble.dae</uri>
+              <scale>0.2 0.2 0.2</scale>
+              <submesh>
+                <name>stamen</name>
+              </submesh>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://bramble/materials/scripts/</uri>
+              <uri>model://bramble/materials/textures/</uri>
+              <name>Bramble/Stamen</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+      <pose>0.098358 0.088398 0.194264 -0.6916 1.42282 0</pose>
+    </model>
+    <model name='bramble_5'>
+      <static>1</static>
+      <link name='flower_link'>
+        <collision name='body_collision'>
+          <geometry>
+            <mesh>
+              <uri>model://bramble/meshes/bramble.dae</uri>
+              <scale>0.2 0.2 0.2</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name='petals'>
+          <geometry>
+            <mesh>
+              <uri>model://bramble/meshes/bramble.dae</uri>
+              <scale>0.2 0.2 0.2</scale>
+              <submesh>
+                <name>petal</name>
+              </submesh>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://bramble/materials/scripts/</uri>
+              <uri>model://bramble/materials/textures/</uri>
+              <name>Bramble/Petal</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='carpel'>
+          <geometry>
+            <mesh>
+              <uri>model://bramble/meshes/bramble.dae</uri>
+              <scale>0.2 0.2 0.2</scale>
+              <submesh>
+                <name>carpel</name>
+              </submesh>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://bramble/materials/scripts/</uri>
+              <uri>model://bramble/materials/textures/</uri>
+              <name>Bramble/Carpel</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='stamen'>
+          <geometry>
+            <mesh>
+              <uri>model://bramble/meshes/bramble.dae</uri>
+              <scale>0.2 0.2 0.2</scale>
+              <submesh>
+                <name>stamen</name>
+              </submesh>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://bramble/materials/scripts/</uri>
+              <uri>model://bramble/materials/textures/</uri>
+              <name>Bramble/Stamen</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+      <pose>0.111615 0.212139 0.060459 -1.60528 0 0.441644</pose>
+    </model>
+    <model name='bramble_6'>
+      <static>1</static>
+      <link name='flower_link'>
+        <collision name='body_collision'>
+          <geometry>
+            <mesh>
+              <uri>model://bramble/meshes/bramble.dae</uri>
+              <scale>0.2 0.2 0.2</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name='petals'>
+          <geometry>
+            <mesh>
+              <uri>model://bramble/meshes/bramble.dae</uri>
+              <scale>0.2 0.2 0.2</scale>
+              <submesh>
+                <name>petal</name>
+              </submesh>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://bramble/materials/scripts/</uri>
+              <uri>model://bramble/materials/textures/</uri>
+              <name>Bramble/Petal</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='carpel'>
+          <geometry>
+            <mesh>
+              <uri>model://bramble/meshes/bramble.dae</uri>
+              <scale>0.2 0.2 0.2</scale>
+              <submesh>
+                <name>carpel</name>
+              </submesh>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://bramble/materials/scripts/</uri>
+              <uri>model://bramble/materials/textures/</uri>
+              <name>Bramble/Carpel</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='stamen'>
+          <geometry>
+            <mesh>
+              <uri>model://bramble/meshes/bramble.dae</uri>
+              <scale>0.2 0.2 0.2</scale>
+              <submesh>
+                <name>stamen</name>
+              </submesh>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://bramble/materials/scripts/</uri>
+              <uri>model://bramble/materials/textures/</uri>
+              <name>Bramble/Stamen</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+      <pose>-0.137015 0.088531 0.154886 -1.15977 0 0.440249</pose>
+    </model>
+    <model name='bramble_7'>
+      <static>1</static>
+      <link name='flower_link'>
+        <collision name='body_collision'>
+          <geometry>
+            <mesh>
+              <uri>model://bramble/meshes/bramble.dae</uri>
+              <scale>0.2 0.2 0.2</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name='petals'>
+          <geometry>
+            <mesh>
+              <uri>model://bramble/meshes/bramble.dae</uri>
+              <scale>0.2 0.2 0.2</scale>
+              <submesh>
+                <name>petal</name>
+              </submesh>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://bramble/materials/scripts/</uri>
+              <uri>model://bramble/materials/textures/</uri>
+              <name>Bramble/Petal</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='carpel'>
+          <geometry>
+            <mesh>
+              <uri>model://bramble/meshes/bramble.dae</uri>
+              <scale>0.2 0.2 0.2</scale>
+              <submesh>
+                <name>carpel</name>
+              </submesh>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://bramble/materials/scripts/</uri>
+              <uri>model://bramble/materials/textures/</uri>
+              <name>Bramble/Carpel</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='stamen'>
+          <geometry>
+            <mesh>
+              <uri>model://bramble/meshes/bramble.dae</uri>
+              <scale>0.2 0.2 0.2</scale>
+              <submesh>
+                <name>stamen</name>
+              </submesh>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://bramble/materials/scripts/</uri>
+              <uri>model://bramble/materials/textures/</uri>
+              <name>Bramble/Stamen</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+      <pose>-0.204156 0.056004 0.008052 -0.215189 -1.08548 0</pose>
+    </model>
+    <model name='bramble_8'>
+      <static>1</static>
+      <link name='flower_link'>
+        <collision name='body_collision'>
+          <geometry>
+            <mesh>
+              <uri>model://bramble/meshes/bramble.dae</uri>
+              <scale>0.2 0.2 0.2</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name='petals'>
+          <geometry>
+            <mesh>
+              <uri>model://bramble/meshes/bramble.dae</uri>
+              <scale>0.2 0.2 0.2</scale>
+              <submesh>
+                <name>petal</name>
+              </submesh>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://bramble/materials/scripts/</uri>
+              <uri>model://bramble/materials/textures/</uri>
+              <name>Bramble/Petal</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='carpel'>
+          <geometry>
+            <mesh>
+              <uri>model://bramble/meshes/bramble.dae</uri>
+              <scale>0.2 0.2 0.2</scale>
+              <submesh>
+                <name>carpel</name>
+              </submesh>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://bramble/materials/scripts/</uri>
+              <uri>model://bramble/materials/textures/</uri>
+              <name>Bramble/Carpel</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='stamen'>
+          <geometry>
+            <mesh>
+              <uri>model://bramble/meshes/bramble.dae</uri>
+              <scale>0.2 0.2 0.2</scale>
+              <submesh>
+                <name>stamen</name>
+              </submesh>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://bramble/materials/scripts/</uri>
+              <uri>model://bramble/materials/textures/</uri>
+              <name>Bramble/Stamen</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+      <pose>-0.120221 0.020138 -0.246229 -0.156128 -1.1483 -0.471223</pose>
+    </model>
+    <model name='bramble_9'>
+      <static>1</static>
+      <link name='flower_link'>
+        <collision name='body_collision'>
+          <geometry>
+            <mesh>
+              <uri>model://bramble/meshes/bramble.dae</uri>
+              <scale>0.2 0.2 0.2</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name='petals'>
+          <geometry>
+            <mesh>
+              <uri>model://bramble/meshes/bramble.dae</uri>
+              <scale>0.2 0.2 0.2</scale>
+              <submesh>
+                <name>petal</name>
+              </submesh>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://bramble/materials/scripts/</uri>
+              <uri>model://bramble/materials/textures/</uri>
+              <name>Bramble/Petal</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='carpel'>
+          <geometry>
+            <mesh>
+              <uri>model://bramble/meshes/bramble.dae</uri>
+              <scale>0.2 0.2 0.2</scale>
+              <submesh>
+                <name>carpel</name>
+              </submesh>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://bramble/materials/scripts/</uri>
+              <uri>model://bramble/materials/textures/</uri>
+              <name>Bramble/Carpel</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='stamen'>
+          <geometry>
+            <mesh>
+              <uri>model://bramble/meshes/bramble.dae</uri>
+              <scale>0.2 0.2 0.2</scale>
+              <submesh>
+                <name>stamen</name>
+              </submesh>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://bramble/materials/scripts/</uri>
+              <uri>model://bramble/materials/textures/</uri>
+              <name>Bramble/Stamen</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+      <pose>0.246145 0.041329 0.083247 -3.14159 1.42795 -2.22567</pose>
+    </model>
+    <model name='tree-mesh'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://tree-mesh/meshes/new_tree.dae</uri>
+              <scale>0.0625 0.0625 0.0625</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name='leaves'>
+          <geometry>
+            <mesh>
+              <uri>model://tree-mesh/meshes/leaves.dae</uri>
+              <scale>0.0325 0.0325 0.0325</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://tree-mesh/materials/scripts/</uri>
+              <uri>model://tree-mesh/materials/textures/</uri>
+              <name>NewTree/Branch</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='bark'>
+          <geometry>
+            <mesh>
+              <uri>model://tree-mesh/meshes/bark.dae</uri>
+              <scale>0.0325 0.0325 0.0325</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://tree-mesh/materials/scripts/</uri>
+              <uri>model://tree-mesh/materials/textures/</uri>
+              <name>NewTree/Bark</name>
+            </script>
+          </material>
+        </visual>
+      </link>
+      <pose>-0.025471 -0.081908 -0.733838 0 -0 0</pose>
+    </model>
+    <static>0</static>
+    <allow_auto_disable>1</allow_auto_disable>
+  </model>
+</sdf>

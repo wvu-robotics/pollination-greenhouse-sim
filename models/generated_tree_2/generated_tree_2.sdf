@@ -1,0 +1,133 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <model name="tree-flowers">
+    <!--Skew-Seed:3545704200-->
+    <static>true</static>
+    <link name="link"/>
+    <include>
+      <uri>model://tree-mesh</uri>
+      <pose>0 0 0 0 0 0</pose>
+    </include>
+    <joint name="tree_joint" type="fixed">
+      <child>tree-mesh::link</child>
+      <parent>link</parent>
+    </joint>
+    <include>
+      <name>bramble_0</name>
+      <uri>model://bramble</uri>
+      <pose> 0.10595752298026981 -0.04446028914676502 0.5165304973514881 0.3315102621713183 2.0511141538475135 0.0</pose>
+    </include>
+    <joint name="flower_joint_0" type="fixed">
+      <child>bramble_0::flower_link</child>
+      <parent>link</parent>
+    </joint>
+    <include>
+      <name>bramble_1</name>
+      <uri>model://bramble</uri>
+      <pose> -0.12570324773878533 0.08668137703158835 0.5966121828599124 -2.0193591231494077 2.0253849971217717 0.0</pose>
+    </include>
+    <joint name="flower_joint_1" type="fixed">
+      <child>bramble_1::flower_link</child>
+      <parent>link</parent>
+    </joint>
+    <include>
+      <name>bramble_2</name>
+      <uri>model://bramble</uri>
+      <pose> -0.11218535376325861 0.1250337994184457 0.30469786259541154 -2.8859426375593378 1.247423595989858 0.0</pose>
+    </include>
+    <joint name="flower_joint_2" type="fixed">
+      <child>bramble_2::flower_link</child>
+      <parent>link</parent>
+    </joint>
+    <include>
+      <name>bramble_3</name>
+      <uri>model://bramble</uri>
+      <pose> 0.06520658410422868 0.0584659590216509 0.40863409403502715 -1.2857175314590177 2.325571220406145 0.0</pose>
+    </include>
+    <joint name="flower_joint_3" type="fixed">
+      <child>bramble_3::flower_link</child>
+      <parent>link</parent>
+    </joint>
+    <include>
+      <name>bramble_4</name>
+      <uri>model://bramble</uri>
+      <pose> -0.10862702645082092 -0.07173760766909533 0.4274479647951466 -3.767192042869941 1.0300163795350008 0.0</pose>
+    </include>
+    <joint name="flower_joint_4" type="fixed">
+      <child>bramble_4::flower_link</child>
+      <parent>link</parent>
+    </joint>
+    <include>
+      <name>bramble_5</name>
+      <uri>model://bramble</uri>
+      <pose> -0.120452880480476 -0.07664308011715537 0.42878302613239905 -3.2336564029646873 1.0557628729397939 0.0</pose>
+    </include>
+    <joint name="flower_joint_5" type="fixed">
+      <child>bramble_5::flower_link</child>
+      <parent>link</parent>
+    </joint>
+    <include>
+      <name>bramble_6</name>
+      <uri>model://bramble</uri>
+      <pose> -0.07052683687164805 0.11984561661814441 0.38310249672062313 -1.7560878854160984 1.6480696975780225 0.0</pose>
+    </include>
+    <joint name="flower_joint_6" type="fixed">
+      <child>bramble_6::flower_link</child>
+      <parent>link</parent>
+    </joint>
+    <include>
+      <name>bramble_7</name>
+      <uri>model://bramble</uri>
+      <pose> -0.1162227475901394 0.07770575926928576 0.36882517533991155 -3.0129363794161144 1.3624932021760918 0.0</pose>
+    </include>
+    <joint name="flower_joint_7" type="fixed">
+      <child>bramble_7::flower_link</child>
+      <parent>link</parent>
+    </joint>
+    <include>
+      <name>bramble_8</name>
+      <uri>model://bramble</uri>
+      <pose> -0.12484919432899994 0.12583162292573322 0.39524353311807164 -2.4497760071277446 2.2667052662533167 0.0</pose>
+    </include>
+    <joint name="flower_joint_8" type="fixed">
+      <child>bramble_8::flower_link</child>
+      <parent>link</parent>
+    </joint>
+    <include>
+      <name>bramble_9</name>
+      <uri>model://bramble</uri>
+      <pose> 0.05289969060778704 -0.06719796505543427 0.37229908421365904 1.097315695012899 1.1303711689935405 0.0</pose>
+    </include>
+    <joint name="flower_joint_9" type="fixed">
+      <child>bramble_9::flower_link</child>
+      <parent>link</parent>
+    </joint>
+    <include>
+      <name>bramble_10</name>
+      <uri>model://bramble</uri>
+      <pose> -0.08177512369961383 0.11319590124698661 0.426723125396606 -2.2599059629461555 2.124809551991471 0.0</pose>
+    </include>
+    <joint name="flower_joint_10" type="fixed">
+      <child>bramble_10::flower_link</child>
+      <parent>link</parent>
+    </joint>
+    <include>
+      <name>bramble_11</name>
+      <uri>model://bramble</uri>
+      <pose> -0.06807078786155678 0.07924025094576687 0.3916336514491664 -1.8252247153371506 1.8662525014061957 0.0</pose>
+    </include>
+    <joint name="flower_joint_11" type="fixed">
+      <child>bramble_11::flower_link</child>
+      <parent>link</parent>
+    </joint>
+    <include>
+      <name>bramble_12</name>
+      <uri>model://bramble</uri>
+      <pose> -0.09166863108185101 0.12907926357414037 0.4681631665085499 -1.4671548441699014 2.21927872497168 0.0</pose>
+    </include>
+    <joint name="flower_joint_12" type="fixed">
+      <child>bramble_12::flower_link</child>
+      <parent>link</parent>
+    </joint>
+  </model>
+</sdf>
