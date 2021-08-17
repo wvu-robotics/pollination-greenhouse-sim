@@ -167,7 +167,7 @@ boundary_tree = generateTreeWithFlowers("boundary",generateBoundaryFlowerPoses(o
 #print(prettify(boundary_tree))
 
 #nick wanted 4-7 per side
-flower_bounds = [[8,14]]
+flower_bounds = [[16,20]]
 
 #command line utility
 if(len(sys.argv) <= 1) : print("Please specify the number of trees to generate as a command line argument")
