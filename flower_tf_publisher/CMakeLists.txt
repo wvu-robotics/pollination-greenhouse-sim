@@ -13,6 +13,7 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   tf2
   tf2_ros
+  message_generation
 )
 
 ## System dependencies are found with CMake's conventions
@@ -86,7 +87,7 @@ generate_messages(
 catkin_package(
   INCLUDE_DIRS include
 #  LIBRARIES flower_tf_publisher
-  CATKIN_DEPENDS gazebo_ros geometry_msgs roscpp tf2 tf2_ros
+  CATKIN_DEPENDS gazebo_ros geometry_msgs roscpp tf2 tf2_ros message_runtime
 #  DEPENDS system_lib
 )
 
@@ -103,6 +104,7 @@ include_directories(
 
 ## Declare a C++ library
 add_library(nearest_flower src/nearest_flower.cpp)
+add_dependencies(nearest_flower ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 target_link_libraries(nearest_flower
   ${catkin_LIBRARIES}
 )
@@ -116,11 +118,13 @@ target_link_libraries(nearest_flower
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
 add_executable(${PROJECT_NAME}_node src/flower_tf_publisher_node.cpp)
+add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 target_link_libraries(${PROJECT_NAME}_node
   ${catkin_LIBRARIES}
 )
 
 add_executable(nearest_flower_server src/nearest_flower_server.cpp)
+add_dependencies(nearest_flower_server ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 target_link_libraries(nearest_flower_server
   ${catkin_LIBRARIES}
   nearest_flower
