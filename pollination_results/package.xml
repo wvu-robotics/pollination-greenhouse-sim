@@ -54,7 +54,9 @@
   <build_depend>roscpp</build_depend>
   <build_depend>tf2</build_depend>
   <build_depend>tf2_ros</build_depend>
+  <build_depend>tf2_geometry_msgs</build_depend>
   <build_depend>manipulation_common</build_depend>
+  <build_depend>gazebo_msgs</build_depend>
   <build_export_depend>geometry_msgs</build_export_depend>
   <build_export_depend>roscpp</build_export_depend>
   <build_export_depend>tf2</build_export_depend>
@@ -63,10 +65,11 @@
   <exec_depend>roscpp</exec_depend>
   <exec_depend>tf2</exec_depend>
   <exec_depend>tf2_ros</exec_depend>
+  <exec_depend>tf2_geometry_msgs</exec_depend>
   <exec_depend>message_generation</exec_depend>
   <exec_depend>message_runtime</exec_depend>
   <exec_depend>manipulation_common</exec_depend>
-
+  <exec_depend>gazebo_msgs</exec_depend>
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>
