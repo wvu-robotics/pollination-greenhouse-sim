@@ -30,21 +30,25 @@ ResultsEvaluator::ResultsEvaluator() :
         ROS_FATAL("No approached_distance_threshold param provided");
         exit(1);
     }
+    this->approached_distance_threshold *= 0.01; // cm -> m
     if(ros::param::get(ros::this_node::getName()+"/end_effector_tip_diameter", this->end_effector_tip_diameter) == false)
     {
         ROS_FATAL("No end_effector_tip_diameter param provided");
         exit(1);
     }
+    this->end_effector_tip_diameter *= 0.01; // cm -> m
     if(ros::param::get(ros::this_node::getName()+"/end_effector_extension_length", this->end_effector_extension_length) == false)
     {
         ROS_FATAL("No end_effector_extension_length param provided");
         exit(1);
     }
+    this->end_effector_extension_length *= 0.01; // cm -> m
     if(ros::param::get(ros::this_node::getName()+"/flower_pollinated_zenith_angle_range", this->flower_pollinated_zenith_angle_range) == false)
     {
         ROS_FATAL("No flower_pollinated_zenith_angle_range");
         exit(1);
     }
+    this->flower_pollinated_zenith_angle_range *= M_PI/180.0; // deg -> rad
 
     // Wait for /gazebo/link_states to be published in order to get flower true poses and names
     gazebo_msgs::LinkStatesConstPtr link_states_msg_ptr = ros::topic::waitForMessage<gazebo_msgs::LinkStates>(this->link_states_topic_name, nh);
@@ -144,7 +148,6 @@ void ResultsEvaluator::updateFlowersDetected()
             {
                 best_distance_squared = distance_squared;
                 best_id = j;
-                // TODO: need to record mapping of true ID to detected id as well. Need that for approach and pollinated
             }
         }
         if(best_id == -1) // No closest flower found
@@ -196,13 +199,41 @@ void ResultsEvaluator::updateFlowersApproached()
                                  pow(end_effector_pose.transform.translation.z - true_flower_position.z, 2.0));
     if(distance_error < this->approached_distance_threshold) // If end effector is close enough to true flower, record flower as approached
     {
-        this->approached_flower_true_ids.push_back(true_flower_id);
+        this->approached_flower_true_ids.push_back(true_flower_id); // TODO: need to add a check, similar to that for detected flowers, to check that this true ID hasn't already been approached to avoid double counting
     }
 }
 
 void ResultsEvaluator::updateFlowersPollinated()
 {
+    // Set truth tf of world -> end_effector
+    setWorldtoEndEffectorLinkTF();
+
+    // Get frame name of flower being pollinated
+    unsigned int true_flower_id = this->detected_flower_id_to_true_flower_id_map.find(this->manip_state_machine_msg.target_flower_id)->second;
+    std::string flower_frame_name = this->flower_names.at(true_flower_id);
+
+    // Look up tf of end_effector -> flower
+    geometry_msgs::TransformStamped flower_in_end_effector_pose = this->gazebo_truth_buffer.lookupTransform(flower_frame_name, "j2n6s300_end_effector", ros::Time(0));
     
+    // Look up tf of flower -> end_effector
+    geometry_msgs::TransformStamped end_effector_in_flower_pose = this->gazebo_truth_buffer.lookupTransform("j2n6s300_end_effector", flower_frame_name, ros::Time(0));
+
+    // Compute distance and angle metrics needed to check if flower has been pollinated by end effector
+    double flower_radial_position_error = hypot(flower_in_end_effector_pose.transform.translation.x, flower_in_end_effector_pose.transform.translation.y);
+    double flower_z_error = flower_in_end_effector_pose.transform.translation.z;
+    double end_effector_distance_error = sqrt(pow(end_effector_in_flower_pose.transform.translation.x, 2.0) +
+                                              pow(end_effector_in_flower_pose.transform.translation.y, 2.0) +
+                                              pow(end_effector_in_flower_pose.transform.translation.z, 2.0));
+    double end_effector_zenith_angle = acos(end_effector_in_flower_pose.transform.translation.z / end_effector_distance_error);
+
+    // Check if flower is within cylindrical projection of end effector and end effector is within shperical sector of flower
+    if((flower_radial_position_error < this->end_effector_tip_diameter) &&
+            (flower_z_error > 0.0 && flower_z_error < this->end_effector_extension_length) &&
+            (end_effector_distance_error < this->end_effector_extension_length) &&
+            (end_effector_zenith_angle < this->flower_pollinated_zenith_angle_range))
+    {
+        this->pollinated_flower_true_ids.push_back(true_flower_id); // TODO: need to add a check, similar to that for detected flowers, to check that this true ID hasn't already been approached to avoid double counting
+    }
 }
 
 void ResultsEvaluator::linkStatesCallback(const gazebo_msgs::LinkStates::ConstPtr& msg)

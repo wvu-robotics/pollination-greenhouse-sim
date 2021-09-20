@@ -50,8 +50,8 @@ public:
     std::vector<unsigned int> pollinated_flower_true_ids;
     std::map<int, unsigned int> detected_flower_id_to_true_flower_id_map;
     manipulation_common::StateMachine manip_state_machine_msg;
-    double approached_distance_threshold;
-    double end_effector_tip_diameter;
-    double end_effector_extension_length;
-    double flower_pollinated_zenith_angle_range;
+    double approached_distance_threshold; // m
+    double end_effector_tip_diameter; // m
+    double end_effector_extension_length; // m
+    double flower_pollinated_zenith_angle_range; // rad
 };
