@@ -11,6 +11,7 @@
 #include <sstream>
 #include <vector>
 #include <fstream>
+#include <map>
 
 class ResultsEvaluator
 {
@@ -22,7 +23,7 @@ public:
     void manipStateMachineCallback(const manipulation_common::StateMachine::ConstPtr& msg);
     void updateFlowersDetected();
     void updateFlowersApproached();
-    void updateFloweredPollinated();
+    void updateFlowersPollinated();
     void saveResultsFile();
     void setWorldToBaseLinkTF();
     void setWorldtoEndEffectorLinkTF();
@@ -34,7 +35,6 @@ public:
     unsigned int num_flowers;
     std::vector<geometry_msgs::Pose> flower_true_poses;
     std::vector<std::string> flower_names;
-    geometry_msgs::Pose end_effector_pose;
     std::string results_file_name;
     std::string link_states_topic_name;
     std::string flower_map_topic_name;
@@ -46,4 +46,12 @@ public:
     gazebo_msgs::LinkStates link_states;
     manipulation_common::FlowerMap detected_flowers;
     std::vector<unsigned int> detected_flower_true_ids;
+    std::vector<unsigned int> approached_flower_true_ids;
+    std::vector<unsigned int> pollinated_flower_true_ids;
+    std::map<int, unsigned int> detected_flower_id_to_true_flower_id_map;
+    manipulation_common::StateMachine manip_state_machine_msg;
+    double approached_distance_threshold;
+    double end_effector_tip_diameter;
+    double end_effector_extension_length;
+    double flower_pollinated_zenith_angle_range;
 };
