@@ -24,7 +24,7 @@ public:
     void updateFlowersDetected();
     void updateFlowersApproached();
     void updateFlowersPollinated();
-    void saveResultsFile();
+    void saveResultsFiles();
     void setWorldToBaseLinkTF();
     void setWorldtoEndEffectorLinkTF();
 
@@ -35,11 +35,13 @@ public:
     unsigned int num_flowers;
     std::vector<geometry_msgs::Pose> flower_true_poses;
     std::vector<std::string> flower_names;
-    std::string results_file_name;
+    std::string flower_stats_results_file_name;
+    std::string flower_mapping_error_results_file_name;
     std::string link_states_topic_name;
     std::string flower_map_topic_name;
     std::string manip_state_machine_topic_name;
-    std::ofstream results_file;
+    std::ofstream flower_stats_results_file;
+    std::ofstream flower_mapping_error_results_file; 
     ros::Subscriber link_states_sub;
     ros::Subscriber flower_map_sub;
     ros::Subscriber manip_state_machine_sub;
@@ -49,6 +51,7 @@ public:
     std::vector<unsigned int> approached_flower_true_ids;
     std::vector<unsigned int> pollinated_flower_true_ids;
     std::map<int, unsigned int> detected_flower_id_to_true_flower_id_map;
+    std::vector<geometry_msgs::PointStamped> detected_flower_estimated_positions;
     manipulation_common::StateMachine manip_state_machine_msg;
     double approached_distance_threshold; // m
     double end_effector_tip_diameter; // m

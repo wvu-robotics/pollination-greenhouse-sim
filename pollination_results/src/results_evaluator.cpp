@@ -5,9 +5,14 @@ ResultsEvaluator::ResultsEvaluator() :
 {
     ros::NodeHandle nh;
     // Get launch params
-    if(ros::param::get(ros::this_node::getName()+"/results_file_name", this->results_file_name) == false)
+    if(ros::param::get(ros::this_node::getName()+"/flower_stats_results_file_name", this->flower_stats_results_file_name) == false)
     {
-        ROS_FATAL("No results_file_name param provided");
+        ROS_FATAL("No flower_stats_results_file_name param provided");
+        exit(1);
+    }
+    if(ros::param::get(ros::this_node::getName()+"/flower_mapping_error_results_file_name", this->flower_mapping_error_results_file_name) == false)
+    {
+        ROS_FATAL("No flower_mapping_error_results_file_name param provided");
         exit(1);
     }
     if(ros::param::get(ros::this_node::getName()+"/link_states_topic_name", this->link_states_topic_name) == false)
@@ -82,10 +87,45 @@ ResultsEvaluator::ResultsEvaluator() :
     this->manip_state_machine_sub = nh.subscribe(this->manip_state_machine_topic_name, 1, &ResultsEvaluator::manipStateMachineCallback, this);
 }
 
-void ResultsEvaluator::saveResultsFile()
+void ResultsEvaluator::saveResultsFiles()
 {
-    this->results_file.open(this->results_file_name, std::ios::out | std::ios::trunc);
-    // TODO: fill out results file format
+    // Assemble stats file strings
+    std::string stats_header = "total_flowers,num_flower_detected,num_flowers_approached,num_flowers_pollinated,per_flowers_detected,per_flowers_pollinated,per_flowers_pollinated_out_of_approached\n";
+    unsigned int num_flowers_detected = this->detected_flower_true_ids.size();
+    unsigned int num_flowers_approached = this->approached_flower_true_ids.size();
+    unsigned int num_flowers_pollinated = this->pollinated_flower_true_ids.size();
+    float per_flowers_detected = (float)num_flowers_detected / (float)this->num_flowers * 100.0;
+    float per_flowers_pollinated = (float)num_flowers_pollinated / (float)this->num_flowers * 100.0;
+    float per_flowers_pollinated_out_of_approached = (float)num_flowers_pollinated / (float)num_flowers_approached * 100.0;
+    std::string stats_data = std::to_string(this->num_flowers) + "," + 
+        std::to_string(num_flowers_detected) + "," + 
+        std::to_string(num_flowers_approached) + "," +
+        std::to_string(num_flowers_pollinated) + "," +
+        std::to_string(per_flowers_detected) + "," +
+        std::to_string(per_flowers_pollinated) + "," +
+        std::to_string(per_flowers_pollinated_out_of_approached);
+    
+    // Write to stats file
+    this->flower_stats_results_file.open(this->flower_stats_results_file_name, std::ios::out | std::ios::trunc);
+    this->flower_stats_results_file << stats_header;
+    this->flower_stats_results_file << stats_data;
+    this->flower_stats_results_file.close();
+
+    // Write to mapping error file
+    std::string mapping_error_header = "x,y,z";
+    this->flower_mapping_error_results_file.open(this->flower_mapping_error_results_file_name, std::ios::out | std::ios::trunc);
+    for(unsigned int i = 0; i < this->detected_flower_estimated_positions.size(); i++)
+    {
+        double x_err = (this->detected_flower_estimated_positions.at(i).point.x - this->flower_true_poses.at(this->detected_flower_true_ids.at(i)).position.x) * 100.0; // cm
+        double y_err = (this->detected_flower_estimated_positions.at(i).point.y - this->flower_true_poses.at(this->detected_flower_true_ids.at(i)).position.y) * 100.0; // cm
+        double z_err = (this->detected_flower_estimated_positions.at(i).point.z - this->flower_true_poses.at(this->detected_flower_true_ids.at(i)).position.z) * 100.0; // cm
+        std::string mapping_error_data = std::to_string(x_err) + "," + std::to_string(y_err) + "," + std::to_string(z_err);
+        if(i < (this->detected_flower_estimated_positions.size() - 1)) // Add newline char to all lines except the final line
+        {
+            mapping_error_data += "\n";
+        }
+        this->flower_mapping_error_results_file << mapping_error_data;
+    }
 }
 
 void ResultsEvaluator::setWorldToBaseLinkTF()
@@ -164,6 +204,7 @@ void ResultsEvaluator::updateFlowersDetected()
                     if(best_id == this->detected_flower_true_ids.at(k)) // If ID is already recorded, take note and stop searching list
                     {
                         matching_id_found = true;
+                        ROS_INFO("Duplicate flower detected (ID: %u, name: %s)", best_id, this->flower_names.at(best_id).c_str());
                         break;
                     }
                 }
@@ -171,14 +212,15 @@ void ResultsEvaluator::updateFlowersDetected()
                 {
                     this->detected_flower_true_ids.push_back(best_id);
                     this->detected_flower_id_to_true_flower_id_map.insert(std::make_pair(this->detected_flowers.map.at(i).id, best_id));
+                    this->detected_flower_estimated_positions.push_back(detected_flower_position);
                 }
             }
             else // No IDs recorded so far, so add it to list
             {
                 this->detected_flower_true_ids.push_back(best_id);
                 this->detected_flower_id_to_true_flower_id_map.insert(std::make_pair(this->detected_flowers.map.at(i).id, best_id));
+                this->detected_flower_estimated_positions.push_back(detected_flower_position);
             }
-
         }
     }
 }
@@ -199,7 +241,27 @@ void ResultsEvaluator::updateFlowersApproached()
                                  pow(end_effector_pose.transform.translation.z - true_flower_position.z, 2.0));
     if(distance_error < this->approached_distance_threshold) // If end effector is close enough to true flower, record flower as approached
     {
-        this->approached_flower_true_ids.push_back(true_flower_id); // TODO: need to add a check, similar to that for detected flowers, to check that this true ID hasn't already been approached to avoid double counting
+        if(this->approached_flower_true_ids.size() > 0) // If there are already some approached flower IDs recorded, need to check that the approached flower ID is not already recorded
+        {
+            bool matching_id_found = false;
+            for(unsigned int k = 0; k < this->approached_flower_true_ids.size(); k++)
+            {
+                if(true_flower_id == this->approached_flower_true_ids.at(k))
+                {
+                    matching_id_found = true;
+                    ROS_INFO("Duplicate flower approached (ID: %u, name: %s)",true_flower_id, this->flower_names.at(true_flower_id).c_str());
+                    break;
+                }
+            }
+            if(matching_id_found == false) // If ID not already recorded, add it to list
+            {
+                this->approached_flower_true_ids.push_back(true_flower_id);
+            }
+        }
+        else // No IDs recorded so far, so add it to list
+        {
+            this->approached_flower_true_ids.push_back(true_flower_id);
+        }
     }
 }
 
@@ -232,7 +294,27 @@ void ResultsEvaluator::updateFlowersPollinated()
             (end_effector_distance_error < this->end_effector_extension_length) &&
             (end_effector_zenith_angle < this->flower_pollinated_zenith_angle_range))
     {
-        this->pollinated_flower_true_ids.push_back(true_flower_id); // TODO: need to add a check, similar to that for detected flowers, to check that this true ID hasn't already been approached to avoid double counting
+        if(this->pollinated_flower_true_ids.size() > 0) // If there are already some pollinated flower IDs recorded, need to check that the pollinated flower ID is not already recorded
+        {
+            bool matching_id_found = false;
+            for(unsigned int k = 0; k < this->pollinated_flower_true_ids.size(); k++)
+            {
+                if(true_flower_id == this->pollinated_flower_true_ids.at(k))
+                {
+                    matching_id_found = true;
+                    ROS_INFO("Duplicate flower pollinated (ID: %u, name: %s)",true_flower_id, this->flower_names.at(true_flower_id).c_str());
+                    break;
+                }
+            }
+            if(matching_id_found == false) // If ID not already found, add it to the list
+            {
+                this->pollinated_flower_true_ids.push_back(true_flower_id);
+            }
+        }
+        else // No IDs recorded so far, so add it to list
+        {
+            this->pollinated_flower_true_ids.push_back(true_flower_id);
+        } 
     }
 }
 
