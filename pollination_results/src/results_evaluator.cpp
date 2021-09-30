@@ -30,6 +30,11 @@ ResultsEvaluator::ResultsEvaluator() :
         ROS_FATAL("No manip_state_machine_topic_name param provided");
         exit(1);
     }
+    if(ros::param::get(ros::this_node::getName()+"/mission_complete_topic_name", this->mission_complete_topic_name) == false)
+    {
+        ROS_FATAL("No mission_complete_topic_name param provided");
+        exit(1);
+    } 
     if(ros::param::get(ros::this_node::getName()+"/approached_distance_threshold", this->approached_distance_threshold) == false)
     {
         ROS_FATAL("No approached_distance_threshold param provided");
@@ -85,25 +90,31 @@ ResultsEvaluator::ResultsEvaluator() :
     this->link_states_sub = nh.subscribe(this->link_states_topic_name, 1, &ResultsEvaluator::linkStatesCallback, this);
     this->flower_map_sub = nh.subscribe(this->flower_map_topic_name, 1, &ResultsEvaluator::flowerMapCallback, this);
     this->manip_state_machine_sub = nh.subscribe(this->manip_state_machine_topic_name, 1, &ResultsEvaluator::manipStateMachineCallback, this);
+    this->mission_complete_sub = nh.subscribe(this->mission_complete_topic_name, 1, &ResultsEvaluator::missionCompleteCallback, this);
+
+    // Record start time for computing total mission duration at end
+    this->mission_start_time = ros::Time::now().toSec();
 }
 
 void ResultsEvaluator::saveResultsFiles()
 {
     // Assemble stats file strings
-    std::string stats_header = "total_flowers,num_flower_detected,num_flowers_approached,num_flowers_pollinated,per_flowers_detected,per_flowers_pollinated,per_flowers_pollinated_out_of_approached\n";
+    std::string stats_header = "total_flowers,num_flower_detected,num_flowers_approached,num_flowers_pollinated,per_flowers_detected,per_flowers_pollinated,per_flowers_pollinated_out_of_approached,mission_time_duration\n";
     unsigned int num_flowers_detected = this->detected_flower_true_ids.size();
     unsigned int num_flowers_approached = this->approached_flower_true_ids.size();
     unsigned int num_flowers_pollinated = this->pollinated_flower_true_ids.size();
     float per_flowers_detected = (float)num_flowers_detected / (float)this->num_flowers * 100.0;
     float per_flowers_pollinated = (float)num_flowers_pollinated / (float)this->num_flowers * 100.0;
     float per_flowers_pollinated_out_of_approached = (float)num_flowers_pollinated / (float)num_flowers_approached * 100.0;
+    double mission_time_duration = ros::Time::now().toSec() - this->mission_start_time;
     std::string stats_data = std::to_string(this->num_flowers) + "," + 
         std::to_string(num_flowers_detected) + "," + 
         std::to_string(num_flowers_approached) + "," +
         std::to_string(num_flowers_pollinated) + "," +
         std::to_string(per_flowers_detected) + "," +
         std::to_string(per_flowers_pollinated) + "," +
-        std::to_string(per_flowers_pollinated_out_of_approached);
+        std::to_string(per_flowers_pollinated_out_of_approached) + "," +
+        std::to_string(mission_time_duration);
     
     // Write to stats file
     this->flower_stats_results_file.open(this->flower_stats_results_file_name, std::ios::out | std::ios::trunc);
@@ -112,8 +123,9 @@ void ResultsEvaluator::saveResultsFiles()
     this->flower_stats_results_file.close();
 
     // Write to mapping error file
-    std::string mapping_error_header = "x,y,z";
+    std::string mapping_error_header = "x,y,z\n";
     this->flower_mapping_error_results_file.open(this->flower_mapping_error_results_file_name, std::ios::out | std::ios::trunc);
+    this->flower_mapping_error_results_file << mapping_error_header;
     for(unsigned int i = 0; i < this->detected_flower_estimated_positions.size(); i++)
     {
         double x_err = (this->detected_flower_estimated_positions.at(i).point.x - this->flower_true_poses.at(this->detected_flower_true_ids.at(i)).position.x) * 100.0; // cm
@@ -339,5 +351,13 @@ void ResultsEvaluator::manipStateMachineCallback(const manipulation_common::Stat
     else if(this->manip_state_machine_msg.state == "pollinating") // TODO: ^^^
     {
         updateFlowersPollinated();
+    }
+}
+
+void ResultsEvaluator::missionCompleteCallback(const std_msgs::Bool::ConstPtr& msg)
+{
+    if(msg->data == true)
+    {
+        saveResultsFiles();
     }
 }
