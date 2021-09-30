@@ -1,0 +1,5 @@
+<launch>
+    <node name="results_evaluator_node" pkg="pollination_results" type="results_evaluator_node" >
+        <rosparam file="$(find pollination_results)/config/results_evaluator_param.yaml" command="load" />
+    </node>
+</launch>

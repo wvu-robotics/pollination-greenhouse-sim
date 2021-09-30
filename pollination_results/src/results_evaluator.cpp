@@ -55,10 +55,15 @@ ResultsEvaluator::ResultsEvaluator() :
     this->end_effector_extension_length *= 0.01; // cm -> m
     if(ros::param::get(ros::this_node::getName()+"/flower_pollinated_zenith_angle_range", this->flower_pollinated_zenith_angle_range) == false)
     {
-        ROS_FATAL("No flower_pollinated_zenith_angle_range");
+        ROS_FATAL("No flower_pollinated_zenith_angle_range param provided");
         exit(1);
     }
     this->flower_pollinated_zenith_angle_range *= M_PI/180.0; // deg -> rad
+    if(ros::param::get(ros::this_node::getName()+"/loop_rate", this->loop_rate) == false)
+    {
+        ROS_FATAL("No loop_rate param provided");
+        exit(1);
+    }
 
     // Wait for /gazebo/link_states to be published in order to get flower true poses and names
     gazebo_msgs::LinkStatesConstPtr link_states_msg_ptr = ros::topic::waitForMessage<gazebo_msgs::LinkStates>(this->link_states_topic_name, nh);
@@ -94,6 +99,26 @@ ResultsEvaluator::ResultsEvaluator() :
 
     // Record start time for computing total mission duration at end
     this->mission_start_time = ros::Time::now().toSec();
+
+    // Set results evaluator initial state
+    this->evaluator_state = _idle;
+}
+
+void ResultsEvaluator::run()
+{
+    ros::Rate rate(this->loop_rate);
+    while(ros::ok())
+    {
+        if(this->evaluator_state == _approaching)
+        {
+            updateFlowersApproached();
+        }
+        else if(this->evaluator_state == _pollinating)
+        {
+            updateFlowersPollinated();
+        }
+        rate.sleep();
+    }
 }
 
 void ResultsEvaluator::saveResultsFiles()
@@ -274,6 +299,7 @@ void ResultsEvaluator::updateFlowersApproached()
         {
             this->approached_flower_true_ids.push_back(true_flower_id);
         }
+        this->evaluator_state = _idle;
     }
 }
 
@@ -326,7 +352,8 @@ void ResultsEvaluator::updateFlowersPollinated()
         else // No IDs recorded so far, so add it to list
         {
             this->pollinated_flower_true_ids.push_back(true_flower_id);
-        } 
+        }
+        this->evaluator_state = _idle;
     }
 }
 
@@ -344,13 +371,17 @@ void ResultsEvaluator::flowerMapCallback(const manipulation_common::FlowerMap::C
 void ResultsEvaluator::manipStateMachineCallback(const manipulation_common::StateMachine::ConstPtr& msg)
 {
     this->manip_state_machine_msg = *msg;
-    if(this->manip_state_machine_msg.state == "approaching") // TODO: update these state names and add additional logic if necessary
+    if(this->manip_state_machine_msg.state == "approaching")
     {
-        updateFlowersApproached();
+        this->evaluator_state = _approaching;
     }
-    else if(this->manip_state_machine_msg.state == "pollinating") // TODO: ^^^
+    else if(this->manip_state_machine_msg.state == "pollinating")
     {
-        updateFlowersPollinated();
+        this->evaluator_state = _pollinating;
+    }
+    else
+    {
+        this->evaluator_state = _idle;
     }
 }
 

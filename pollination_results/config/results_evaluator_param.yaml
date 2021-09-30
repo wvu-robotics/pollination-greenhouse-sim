@@ -1,0 +1,11 @@
+flower_stats_results_file_name          :   "~/pollination_sim_results.csv"
+flower_mapping_error_results_file_name  :   "~/pollination_sim_flower_mapping_error.csv"
+link_states_topic_name                  :   "/gazebo/link_states"
+flower_map_topic_name                   :   "/flower_mapper/flower_map"
+manip_state_machine_topic_name          :   "/manipulation_state_machine_state"
+mission_complete_topic_name             :   "/mission_complete"
+approached_distance_threshold           :   10.0 # cm
+end_effector_tip_diameter               :   3.0 # cm
+end_effector_extension_length           :   3.0 # cm
+flower_pollinated_zenith_angle_range    :   60.0 # deg
+loop_rate                               :   20.0 # Hz

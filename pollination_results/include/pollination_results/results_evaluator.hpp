@@ -17,8 +17,12 @@
 class ResultsEvaluator
 {
 public:
+    // Types
+    enum EVALUATOR_STATE_T {_idle, _approaching, _pollinating};
+
     // Methods
     ResultsEvaluator();
+    void run();
     void linkStatesCallback(const gazebo_msgs::LinkStates::ConstPtr& msg);
     void flowerMapCallback(const manipulation_common::FlowerMap::ConstPtr& msg);
     void manipStateMachineCallback(const manipulation_common::StateMachine::ConstPtr& msg);
@@ -62,4 +66,6 @@ public:
     double end_effector_tip_diameter; // m
     double end_effector_extension_length; // m
     double flower_pollinated_zenith_angle_range; // rad
+    double loop_rate; // sec
+    EVALUATOR_STATE_T evaluator_state;
 };
