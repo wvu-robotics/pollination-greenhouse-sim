@@ -111,12 +111,15 @@ void ResultsEvaluator::run()
     {
         if(this->evaluator_state == _approaching)
         {
+            ROS_INFO("approaching...");
             updateFlowersApproached();
         }
         else if(this->evaluator_state == _pollinating)
         {
+            ROS_INFO("pollinating...");
             updateFlowersPollinated();
         }
+        ros::spinOnce();
         rate.sleep();
     }
 }
@@ -195,7 +198,7 @@ void ResultsEvaluator::setWorldtoEndEffectorLinkTF()
     setWorldToBaseLinkTF();
     
     // Look up transform from base_link -> end_effector from broadcast tf tree
-    geometry_msgs::TransformStamped base_link_to_end_effector_tf = tf_tree_buffer.lookupTransform("j2n6s300_end_effector", "base_link", ros::Time(0));
+    geometry_msgs::TransformStamped base_link_to_end_effector_tf = tf_tree_buffer.lookupTransform("base_link", "j2n6s300_end_effector", ros::Time(0));
 
     // Set base_link -> end_effector transform in truth tf buffer
     this->gazebo_truth_buffer.setTransform(base_link_to_end_effector_tf, "gazebo");
@@ -215,7 +218,7 @@ void ResultsEvaluator::updateFlowersDetected()
         double distance_squared;
         double best_distance_squared = std::numeric_limits<double>::max();
         unsigned int best_id = -1;
-        for(unsigned int j = 0; j < this->flower_true_poses.size(); i++)
+        for(unsigned int j = 0; j < this->flower_true_poses.size(); j++)
         {
             geometry_msgs::Point true_flower_position = this->flower_true_poses.at(j).position;
             distance_squared = pow(detected_flower_position.point.x - true_flower_position.x, 2.0)
@@ -250,6 +253,7 @@ void ResultsEvaluator::updateFlowersDetected()
                     this->detected_flower_true_ids.push_back(best_id);
                     this->detected_flower_id_to_true_flower_id_map.insert(std::make_pair(this->detected_flowers.map.at(i).id, best_id));
                     this->detected_flower_estimated_positions.push_back(detected_flower_position);
+                    ROS_INFO("detected flower index %u", best_id);
                 }
             }
             else // No IDs recorded so far, so add it to list
@@ -257,6 +261,7 @@ void ResultsEvaluator::updateFlowersDetected()
                 this->detected_flower_true_ids.push_back(best_id);
                 this->detected_flower_id_to_true_flower_id_map.insert(std::make_pair(this->detected_flowers.map.at(i).id, best_id));
                 this->detected_flower_estimated_positions.push_back(detected_flower_position);
+                ROS_INFO("detected flower index %u", best_id);
             }
         }
     }
@@ -268,14 +273,18 @@ void ResultsEvaluator::updateFlowersApproached()
     setWorldtoEndEffectorLinkTF();
 
     // Look up tf of world -> end_effector
-    geometry_msgs::TransformStamped end_effector_pose = this->gazebo_truth_buffer.lookupTransform("j2n6s300_end_effector", "world", ros::Time(0));
+    geometry_msgs::TransformStamped end_effector_pose = this->gazebo_truth_buffer.lookupTransform("world", "j2n6s300_end_effector", ros::Time(0));
 
     // Check if distance to flower being approached is less than distance threshold
     unsigned int true_flower_id = this->detected_flower_id_to_true_flower_id_map.find(this->manip_state_machine_msg.target_flower_id)->second;
+    ROS_INFO("target_flower_id = %u, true_flower_id = %u",this->manip_state_machine_msg.target_flower_id, true_flower_id);
     geometry_msgs::Point true_flower_position = this->flower_true_poses.at(true_flower_id).position;
+    ROS_INFO("true flower position = [%f, %f, %f]", true_flower_position.x, true_flower_position.y, true_flower_position.z);
+    ROS_INFO("end effector position = [%f, %f, %f]", end_effector_pose.transform.translation.x, end_effector_pose.transform.translation.y, end_effector_pose.transform.translation.z);
     double distance_error = sqrt(pow(end_effector_pose.transform.translation.x - true_flower_position.x, 2.0) +
                                  pow(end_effector_pose.transform.translation.y - true_flower_position.y, 2.0) +
                                  pow(end_effector_pose.transform.translation.z - true_flower_position.z, 2.0));
+    ROS_INFO("distance_error = %lf",distance_error);
     if(distance_error < this->approached_distance_threshold) // If end effector is close enough to true flower, record flower as approached
     {
         if(this->approached_flower_true_ids.size() > 0) // If there are already some approached flower IDs recorded, need to check that the approached flower ID is not already recorded
@@ -313,10 +322,30 @@ void ResultsEvaluator::updateFlowersPollinated()
     std::string flower_frame_name = this->flower_names.at(true_flower_id);
 
     // Look up tf of end_effector -> flower
-    geometry_msgs::TransformStamped flower_in_end_effector_pose = this->gazebo_truth_buffer.lookupTransform(flower_frame_name, "j2n6s300_end_effector", ros::Time(0));
+    geometry_msgs::TransformStamped flower_in_end_effector_pose;
+    try
+    {
+        flower_in_end_effector_pose = this->gazebo_truth_buffer.lookupTransform("j2n6s300_end_effector", flower_frame_name, ros::Time(0));
+    }
+    catch(tf2::ExtrapolationException& e)
+    {
+        ROS_WARN(e.what());
+        return;
+    }
+    ROS_INFO("look up flower in end effector transform");
     
     // Look up tf of flower -> end_effector
-    geometry_msgs::TransformStamped end_effector_in_flower_pose = this->gazebo_truth_buffer.lookupTransform("j2n6s300_end_effector", flower_frame_name, ros::Time(0));
+    geometry_msgs::TransformStamped end_effector_in_flower_pose;
+    try
+    {
+        end_effector_in_flower_pose = this->gazebo_truth_buffer.lookupTransform(flower_frame_name, "j2n6s300_end_effector", ros::Time(0));
+    }
+    catch(tf2::ExtrapolationException& e)
+    {
+        ROS_WARN(e.what());
+        return;
+    }
+    ROS_INFO("look up end effector in flower transform");
 
     // Compute distance and angle metrics needed to check if flower has been pollinated by end effector
     double flower_radial_position_error = hypot(flower_in_end_effector_pose.transform.translation.x, flower_in_end_effector_pose.transform.translation.y);
@@ -325,6 +354,10 @@ void ResultsEvaluator::updateFlowersPollinated()
                                               pow(end_effector_in_flower_pose.transform.translation.y, 2.0) +
                                               pow(end_effector_in_flower_pose.transform.translation.z, 2.0));
     double end_effector_zenith_angle = acos(end_effector_in_flower_pose.transform.translation.z / end_effector_distance_error);
+    ROS_INFO("flower_radial_position_error = %lf",flower_radial_position_error);
+    ROS_INFO("flower_z_error = %lf",flower_z_error);
+    ROS_INFO("end_effector_distance_error = %lf",end_effector_distance_error);
+    ROS_INFO("end_effector_zenith_angle = %lf",180.0/M_PI*end_effector_zenith_angle);
 
     // Check if flower is within cylindrical projection of end effector and end effector is within shperical sector of flower
     if((flower_radial_position_error < this->end_effector_tip_diameter) &&
@@ -383,6 +416,7 @@ void ResultsEvaluator::manipStateMachineCallback(const manipulation_common::Stat
     {
         this->evaluator_state = _idle;
     }
+    ROS_INFO("manipStateMachineCallback");
 }
 
 void ResultsEvaluator::missionCompleteCallback(const std_msgs::Bool::ConstPtr& msg)
